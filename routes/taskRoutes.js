@@ -8,9 +8,11 @@ const {
     deleteTask
 } =require('../controller/taskController');
 
-router.get('/', getAllTask);
-router.post('/', createTask);
-router.put('/:id', updateTask);
+const validateTask = require('../middlewares/validate');
+
+router.get('/',   getAllTask);
+router.post('/', validateTask, createTask);
+router.put('/:id', validateTask, updateTask);
 router.delete('/:id', deleteTask);
 
 module.exports = router;

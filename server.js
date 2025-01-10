@@ -1,15 +1,16 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-
+const errorHandler = require('./middlewares/errorHandler');
 
 //Database
 const connectDB = require('./config/db');
 
 
-//express middleware 
-app.use(express.json());
 
+//middlewares 
+app.use(express.json());
+app.use(errorHandler);
 app.use(express.urlencoded({extended: true}));
 
 //Routers
