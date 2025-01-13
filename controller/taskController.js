@@ -32,7 +32,7 @@ const updateTask = async(req, res, next)=> {
     try {
         const id = req.params.id;
         const {title, completed } = req.body;
-    
+        
         // Check if the task exists
         const existingTask = await Task.findById(id);
         if (!existingTask) {
