@@ -15,8 +15,10 @@ app.use(express.urlencoded({extended: true}));
 
 //Routers
 const taskRouter = require('./routes/taskRoutes');
+const authRouter = require('./routes/authRoutes');
 
 app.use("/api/v1/tasks", taskRouter);
+app.use("/api/v1/auth", authRouter);
 
 
 
