@@ -13,7 +13,7 @@ const validateTask = require('../middlewares/validate');
 
 router.get('/', authMiddleware,  getAllTask);
 router.post('/', authMiddleware, validateTask, createTask);
-router.put('/:id', validateTask, updateTask);
-router.delete('/:id', deleteTask);
+router.put('/:id', authMiddleware, validateTask, updateTask);
+router.delete('/:id', authMiddleware, deleteTask);
 
 module.exports = router;

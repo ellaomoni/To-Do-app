@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const { body , validationResult} = require('express-validator');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 
 const registerUser = async (req, res) => {
   try {
@@ -25,15 +25,11 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    // Hash the password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
     // Create new user
     const newUser = new User({
       name: name,
       email: email,
-      password: hashedPassword,
+      password: password,
     });
 
     // Save user to the database
@@ -54,8 +50,6 @@ const registerUser = async (req, res) => {
             email: newUser.email,
         },
     });
-
-
   } catch (error) {
     res.status(500).json({ message: 'Server Error', error: error.message });
   }
@@ -64,21 +58,27 @@ const registerUser = async (req, res) => {
 
 // Login Controller
 const loginUser = async (req, res) => {
-  const { email, password } = req.body;
-
   try {
+
+    const { email, password } = req.body;
+
+
+    if(!email || !password) {
+      return res.status(400).json({ message: 'Please provide email and password' });
+    }
+
     // Check if the user exists
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ message: 'Invalid email' });
+      return res.status(401).json({ message: 'Invalid email/. Try again' });
     }
 
-    /* Validate the password using the schema method
+   
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {
-      return res.status(401).json({ message:  'Invalid password' });
+      return res.status(401).json({ message: 'Invalid password. Try again.' });
     }
-    */
+  
 
     // Generate JWT Token
     const token = jwt.sign(
@@ -98,7 +98,7 @@ const loginUser = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
 

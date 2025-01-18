@@ -99,11 +99,49 @@ Response:
     "message": "Task deleted successfully"
 }
 
+- Register User 
+URL: /register
+Method: POST
+Description: Register a user
+Response: 
+{
+ "message": "User registered successfully",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OGJmYWNkZmM0YjI1NGU3ZGJhZjcyOSIsImlhdCI6MTczNzIyNjk1OCwiZXhwIjoxNzM3MjMwNTU4fQ.xUnsIP7KxFZ-tQ-OazEHpC3GOy2F0yBl-4hlLlLx7PE",
+    "user": {
+        "id": "678bfacdfc4b254e7dbaf729",
+        "name": "Ella Omoni",
+        "email": "ellaomoni@gmail.com"
+    }
+}
+
+- Login 
+URL: /login
+Method: POST
+Description: Login the user
+Response: 
+{
+    "message": "Login successful",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OGJmYWNkZmM0YjI1NGU3ZGJhZjcyOSIsImlhdCI6MTczNzIyNjk3MCwiZXhwIjoxNzM3MjMwNTcwfQ.uAvOty_0vjYsm4h7sUftyO5syZhzeVX1N_AwlCSY72E",
+    "user": {
+        "id": "678bfacdfc4b254e7dbaf729",
+        "name": "Ella Omoni",
+        "email": "ellaomoni@gmail.com"
+    }
+}
+
+# Validation Rules
+Email must be a valid email format 
+Password must be at least 8 characters
+
 # Error Handling 
 - Common Error Responses
 400 Bad Request: Validation errors (missing fields, invalid data)
 404 Not Found: Task not found
 500 Internal Server Error: Server-side errors
+- Invalid credentials
+401: Unauthorized
+
+
 
 
 # Future Development
