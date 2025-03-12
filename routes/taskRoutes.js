@@ -12,7 +12,7 @@ const {
 const validateTask = require('../middlewares/validate');
 
 router.get('/', authMiddleware,  getAllTask);
-router.post('/', authMiddleware, validateTask, createTask);
+router.post('/create-task', authMiddleware, validateTask, createTask);
 router.put('/:id', authMiddleware, validateTask, updateTask);
 router.delete('/:id', authMiddleware, deleteTask);
 
