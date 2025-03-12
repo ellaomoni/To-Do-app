@@ -70,7 +70,7 @@ const loginUser = async (req, res) => {
     // Check if the user exists
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ message: 'Invalid email/. Try again' });
+      return res.status(401).json({ message: 'Invalid email Try again' });
     }
 
    
